@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>INTERACTIVE BUBBLES</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <style>
+    .red{
+      color:#ff0000;
+    }
+    .yellow{
+      color:#ffff00;
+    }
+    .blue{
+      color:#0080ff;
+    }
+    .green{
+      color:#00ff00;
+    }
+    .purple{
+        color:#bf00ff;
+    }
+    select{
+      margin-bottom: 50px;
+    }
+      h1{
+        text-align: center;
+      }
+
+  #zoomed {
+    margin-left: 10px;
+    font-style: italic;
+  }
+
+        svg{
+          margin-left: 50px;
+          padding: 10px;
+          background: #f1f1f1;
+          overflow: hidden;
+        }
+        .tooltip
+        {
+              position: absolute;
+              font-size: 16px;
+              padding: 10px;
+              width:  auto;
+              height: auto;
+              pointer-events: none;
+              background-color: white;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Child Qualities from 1981 - 2014</h1>
+    <span>Select qualities: </span>
+  <select id="checklist">
+     <option value="manners">Good Manners</option>
+     <option value="independence">Independence</option>
+     <option value="work">Hard Work</option>
+     <option value="responsibility">Feeling of responsibility</option>
+     <option value="imagination">Imagination</option>
+     <option value="respect">Tolerance and respect for other people</option>
+     <option value="money">Thrift saving money and things</option>
+     <option value="determination">Determination perseverance</option>
+     <option value="religious">Religious faith</option>
+     <option value="unselfishness">Unselfishness</option>
+     <option value="obedience">Obedience</option>
+  </select>
+  <span> Select year: </span>
+  <select id="year_checklist">
+     <option value="1981">1981</option>
+     <option value="1982">1982</option>
+     <option value="1983">1983</option>
+     <option value="1984">1984</option>
+     <option value="1990">1990</option>
+     <option value="1991">1991</option>
+     <option value="1992">1992</option>
+     <option value="1993">1993</option>
+     <option value="1994">1994</option>
+     <option value="1995">1995</option>
+     <option value="1996">1996</option>
+     <option value="1997">1997</option>
+     <option value="1998">1998</option>
+     <option value="1999">1999</option>
+     <option value="2000">2000</option>
+     <option value="2001">2001</option>
+     <option value="2002">2002</option>
+     <option value="2003">2003</option>
+     <option value="2004">2004</option>
+     <option value="2005">2005</option>
+     <option value="2006">2006</option>
+     <option value="2007">2007</option>
+     <option value="2008">2008</option>
+     <option value="2009">2009</option>
+     <option value="2010">2010</option>
+     <option value="2011">2011</option>
+     <option value="2012">2012</option>
+     <option value="2013">2013</option>
+     <option value="2014">2014</option>
+  </select>
+  <button id="search"> Visualize</button>
+  <div id="btn">
+    <label class="radio-inline">
+      <input type="radio" name="optradio" id="zoomin">Zoom In
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="optradio" id="zoomout">Zoom Out
+    </label>
+
+    <span id="zoomed"></span>
+
+  </div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+        <div id="chart"></div>
+    </div>
+  </div>
+</div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Analytical Trail :</h3>
+        <p>Most of the  data came from the website "World Values Journey" (http://www.worldvaluessurvey.org/wvs.jsp), which is a global network of scientists who study the changing values and the impact in the humanity.</p>
+        <p>This study consists all the waves (1981 - 2014) , every country from every wave (#87), and is very focused to which child qualities, the parents considered as the most important (Good manners, Independence , Hard Work, etc.).</p>
+        <p>Another data source, was the Gapminder website, which provided the number of child deaths for every country</p>
+        <p>Therefore the above visualization presents, how important  for every country for a specific year these child qualities are and also presents the number of child deaths for this year.</p>
+        <p>The users can select the quality and the year that want and then visualize them</p>
+        <p>The users also can select if they want to zoom in or zoom out  to the data</p>
+        <p><i>Size of the circles: the importance of the quality</i></p>
+        <p>Color of circles: Europe<span class="red">(Red)</span>,Asia<span class="yellow">(yellow)</span>,America <span class="blue">(blue)</span>,Africa <span class="green">(green)</span>,Oceania<span class="purple">(purple)</span> </p>
+        <p><i>Horizontal position of the circles: number of child deaths for the specific year</i></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Research question :</h3>
+          <p><i><b>The variety of parent's opinion about the most important child qualities, and how these opinions reflect to the number of child deaths</b></i></p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3> Valuable Insights:</h3>
+        <ul>
+          <li>India is the country with the biggest number of child deaths across the years</li>
+          <li>The most important value in China and in India is: Hard Work</li>
+          <li>Contries from Africa consider good manners as more important child quality than the hard work</li>
+          <li>During years Sweden has the least child deaths, and hard work as the least child quality</li>
+          <li>Mostly countries from America or Asia think "religious faith" as very important quality</li>
+          <li>Imagination rates are very low especially before 2000</li>
+          <li>Nigeria is the country with the highest rate of good manners</li>
+          <li>India has the most deaths and consider the hard work as most important during the years, while Sweden with the least deaths consider the Hard work as the least important</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="control.js"></script>
+    <script src="bubble.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
